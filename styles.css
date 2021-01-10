@@ -1,16 +1,31 @@
+/* declaring global css variables */
 :root {
     --menu-bar-width: 60px;
     --menu-bar-height: 10px;
 }
 
+/* selection container created - same width as selector #menu, included padding */
+#container {
+    width: var(--menu-bar-width);
+    height: var(--menu-bar-height);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* middle purple bar - using  global css variables:width/height - base element */
 #menu {
     background-color: #D84282;
     position: relative;
     width: var(--menu-bar-width);
     height: var(--menu-bar-height);
-    margin: 100px;
 }
 
+/* creating transitional element for #menu (purple middle bar) - setting background-color to transparent */
+#container:hover #menu {
+    background-color: transparent;
+}
+
+/* upper- and lower purple bar (block) - using  global css variables: width/height - absolute positioned */
 #menu::before,
 #menu::after {
     background-color: #D84282;
@@ -21,13 +36,28 @@
     position: absolute;
 }
 
+/* upper purple bar (block) specific coordinates */
 #menu::before {
     left: 0;
     top: -20px;
 }
 
+/* upper purple bar (block) specific coordinates */
 #menu::after {
     left: 0;
     top: 20px;
 }
 
+/* upper purple bar: connected selector-container to upper purple bar -setting it to transform(rotate) */
+#container:hover #menu::before {
+    top: 0;
+    transform: rotate(45deg);
+    transition: ease 1s;
+}
+
+/*lower purple bar: connected selector-container to lower purple bar -setting it to transform(rotate) */
+#container:hover #menu::after {
+    top: 0;
+    transform: rotate(-45deg);
+    transition: ease 1s;
+}
